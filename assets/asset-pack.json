@@ -1,0 +1,34 @@
+{
+    "section1": {
+        "files": [
+            {
+                "url": "assets/apple.png",
+                "type": "image",
+                "key": "apple"
+            },
+            {
+                "url": "assets/blob.png",
+                "type": "image",
+                "key": "blob"
+            },
+            {
+                "url": "assets/dino.png",
+                "key": "dino",
+                "type": "image"
+            },
+            {
+                "url": "assets/hedgehog.png",
+                "type": "image",
+                "key": "hedgehog"
+            }
+        ]
+    },
+    "meta": {
+        "app": "Phaser Editor 2D - Asset Pack Editor",
+        "contentType": "phasereditor2d.pack.core.AssetContentType",
+        "url": "https://phasereditor2d.com",
+        "version": 2,
+        "showAllFilesInBlocks": false,
+        "visible": true
+    }
+}
