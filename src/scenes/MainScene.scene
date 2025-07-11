@@ -20,8 +20,8 @@
             "texture": {
                 "key": "hedgehog"
             },
-            "x": 160,
-            "y": 428,
+            "x": 156,
+            "y": 530,
             "scaleX": 1.2,
             "scaleY": 1.2,
             "ArcadeComponent.active": true,
@@ -171,6 +171,8 @@
             "y": -20,
             "ArcadeComponent.active": true,
             "body.maxVelocity.x": 100000000,
+            "collideWorldBounds": true,
+            "onWorldBounds": true,
             "body.width": 100,
             "body.height": 119
         },
@@ -193,6 +195,19 @@
             "y": 16,
             "text": "0",
             "fontSize": "32px"
+        },
+        {
+            "type": "Text",
+            "id": "4e7d5144-d396-4f24-ab14-5a255e867785",
+            "label": "text_3",
+            "scope": "CLASS",
+            "x": 640,
+            "y": 260,
+            "originX": 0.5,
+            "originY": 0.5,
+            "visible": false,
+            "text": "Your score: ",
+            "fontSize": "64px"
         }
     ],
     "plainObjects": [

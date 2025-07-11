@@ -24,7 +24,7 @@ export default class MainScene extends Phaser.Scene {
 
 		// hedgehog
 		/** @type {Phaser.GameObjects.Image & { body: Phaser.Physics.Arcade.Body }} */
-		const hedgehog = this.add.image(160, 428, "hedgehog");
+		const hedgehog = this.add.image(156, 530, "hedgehog");
 		hedgehog.scaleX = 1.2;
 		hedgehog.scaleY = 1.2;
 		this.physics.add.existing(hedgehog, false);
@@ -106,6 +106,8 @@ export default class MainScene extends Phaser.Scene {
 		const apple = this.add.image(594, -20, "apple");
 		this.physics.add.existing(apple, false);
 		apple.body.maxVelocity.x = 100000000;
+		apple.body.collideWorldBounds = true;
+		apple.body.onWorldBounds = true;
 		apple.body.setSize(100, 119, false);
 
 		// text_1
@@ -117,6 +119,13 @@ export default class MainScene extends Phaser.Scene {
 		const text_2 = this.add.text(156, 16, "", {});
 		text_2.text = "0";
 		text_2.setStyle({ "fontSize": "32px" });
+
+		// text_3
+		const text_3 = this.add.text(640, 260, "", {});
+		text_3.setOrigin(0.5, 0.5);
+		text_3.visible = false;
+		text_3.text = "Your score: ";
+		text_3.setStyle({ "fontSize": "64px" });
 
 		// collider
 		const collider = this.physics.add.overlap(hedgehog, apple, this.collide);
@@ -130,6 +139,7 @@ export default class MainScene extends Phaser.Scene {
 		this.apple = apple;
 		this.text_1 = text_1;
 		this.text_2 = text_2;
+		this.text_3 = text_3;
 		this.rightKey = rightKey;
 		this.collider = collider;
 
@@ -154,6 +164,8 @@ export default class MainScene extends Phaser.Scene {
 	text_1;
 	/** @type {Phaser.GameObjects.Text} */
 	text_2;
+	/** @type {Phaser.GameObjects.Text} */
+	text_3;
 	/** @type {Phaser.Input.Keyboard.Key} */
 	rightKey;
 	/** @type {Phaser.Physics.Arcade.Collider} */
@@ -167,6 +179,8 @@ export default class MainScene extends Phaser.Scene {
 
 		this.editorCreate();
 
+		this.physics.world.setBoundsCollision(true, true, false, true);
+
 		const bushes = [this.dark_ground_blob, this.dark_ground_blob_1, this.dark_ground_blob_2, this.dark_ground_blob_3];
 
 		const positions = [];
@@ -178,7 +192,7 @@ export default class MainScene extends Phaser.Scene {
 		const first_position = positions[0];
 
 		this.hedgehog.x = first_position.x;
-		this.hedgehog.y = first_position.y;
+		//this.hedgehog.y = first_position.y;
 
 		this.apple.x = first_position.x;
 		this.apple.y = 0;
@@ -193,10 +207,21 @@ export default class MainScene extends Phaser.Scene {
 
 			const new_hedgehog_position = positions[current_position_index];
 			this.hedgehog.x = new_hedgehog_position.x;
-			this.hedgehog.y = new_hedgehog_position.y;
+			//this.hedgehog.y = new_hedgehog_position.y;
 		})
 
 		this.positions = positions;
+
+		let endGame = false;
+
+		this.physics.world.on("worldbounds", () => {
+			if(!endGame){
+				endGame = true;
+				this.hedgehog.y = 430;
+				this.text_3.text += this.text_2.text;
+				this.text_3.visible = true;
+			}
+		})
 
 		// const clouds = [this.blob, this.blob_1, this.blob_2];
 		// clouds.forEach(cloud => {
